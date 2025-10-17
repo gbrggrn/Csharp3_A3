@@ -1,0 +1,289 @@
+﻿@page
+@model Csharp3_A1.Pages.StaffDashboard.StaffDashboardModel
+@{
+	ViewData["Title"] = "Staff Dashboard";
+}
+
+<ul ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link @(Model.ActiveTab == "tab1" ? "active" : "")" data-bs-toggle="tab" href="#tab1">Dashboard</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link @(Model.ActiveTab == "tab2" ? "active" : "")" data-bs-toggle="tab" href="#tab2">Patients</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link @(Model.ActiveTab == "tab3" ? "active" : "")" data-bs-toggle="tab" href="#tab3">Appointments</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link @(Model.ActiveTab == "tab4" ? "active" : "")" data-bs-toggle="tab" href="#tab4">Reports</a>
+	</li>
+</ul>
+
+<div class="tab-content mt-3">
+	<div class="tab-pane fade @(Model.ActiveTab == "tab1" ? "show active" : "")" id="tab1">
+		<!-- Dashboard content-->
+		<h2>Dashboard Overview</h2>
+
+		<!-- Row 1 * 3 cards-->
+		<div class="row g-4">
+			<!-- Card 1 -->
+			<div class="col-md-4">
+				<div class="card h-100">
+					<div class="card-body text-center">
+						<h5 class="card-title">Total Patients</h5>
+						<h2 class="card-text">@Model.Patients.Count.ToString()</h2>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card 2 -->
+			<div class="col-md-4">
+				<div class="card h-100">
+					<div class="card-body text-center">
+						<h5 class="card-title">Today's Appointments</h5>
+						<h2 class="card-text">@Model.Appointments.Where(a => a.DateOfAppointment.Date == DateTime.Now.Date).ToList().Count.ToString()</h2>
+					</div>
+				</div>
+			</div>
+
+			<!-- Card 3 -->
+			<div class="col-md-4">
+				<div class="card h-100">
+					<div class="card-body text-center">
+						<h5 class="card-title">Active Alerts</h5>
+						<ul>
+							<li>High-fever in Room 305</li>
+							<li>Low stock: Amlodipine</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Row 2 * 2 cards -->
+		<div class="row g-4 mt-2">
+			<!-- Card 1 -->
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5>Weekly Admissions</h5>
+					</div>
+					<div class="card-body">
+						<img src="~/images/content/colorful-growth-graph-icon-isolated.jpg" class="img-fluid" />
+					</div>
+				</div>
+			</div>
+
+			<!-- Card 2 -->
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5>Patient Status Distribution</h5>
+					</div>
+					<div class="card-body">
+						<img src="~/images/content/pie-chart-paper-business-hand-craft-element.jpg" class="img-fluid" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-pane fade @(Model.ActiveTab == "tab2" ? "show active" : "")" id="tab2">
+		<!-- Patients content -->
+
+		<!-- Page title -->
+		<h3>Manage patient records</h3>
+
+		<!-- Search bar -->
+		<form class="d-flex mx-auto flex-nowrap mb-2">
+			<input class="form-control me-2" type="search" placeholder="Search" />
+			<button class="btn btn-outline-primary" type="submit">Search patient</button>
+		</form>
+
+		<div class="row g-4">
+			<!-- Patient list -->
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">Patient List</div>
+					<ul class="list-group list-group-flush">
+						@foreach (var patient in Model.Patients)
+						{
+							<a asp-page="/StaffPages/StaffDashboard" asp-route-id="@patient.Id" asp-route-tab="tab2">
+								@patient.Name
+							</a>
+						}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Patient details -->
+			<div class="col-md-8">
+				<div class="card">
+					<div class="card-header">Patient Details</div>
+					<div class="card-body">
+						@if (Model.SelectedPatient != null)
+						{
+							<h5>@Model.SelectedPatient!.Name</h5>
+							<p>Date of Birth: @Model.SelectedPatient.DateOfBirth.ToShortDateString()</p>
+
+							<h6>Medical History:</h6>
+							if (Model.MedicalHistory.Any())
+							{
+								<ul>
+									@foreach (var history in Model.MedicalHistory)
+									{
+										<li>Date of visit: @history.DateOfVisit.ToShortDateString()</li>
+										<li>Reason: @history.Reason</li>
+										<li>Notes: @history.Notes</li>
+										<li>Prescriptions: @history.Prescriptions</li>
+									}
+								</ul>
+							}
+							else
+							{
+								<p>No history available for this patient</p>
+							}
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-pane fade @(Model.ActiveTab == "tab3" ? "show active" : "")" id="tab3">
+		<!-- Appointments sidebar -->
+		<div class="row g-4">
+			<div class="col-md-3">
+				<div class="nav d-flex flex-column gap-2 p-2 bg-black bg-opacity-10"
+					 style="width: 220px; min-height: 100vh; position: fixed;">
+					<a href="#all" data-bs-toggle="tab" class="nav-link active d-block mb-2 dashboard-sidebar-link">All</a>
+					<a href="#upcoming" data-bs-toggle="tab" class=" nav-link d-block mb-2 dashboard-sidebar-link">Upcoming</a>
+					<a href="#pending" data-bs-toggle="tab" class="nav-link d-block mb-2 dashboard-sidebar-link">Pending</a>
+					
+					<!-- Schedule Appointment button -->
+					<a class="btn btn-outline-primary nav-link" data-bs-toggle="tab" href="#scheduleAppointment">Manage appointments</a>
+				</div>
+			</div>
+
+			<!-- Appointments content -->
+			<div class="col-md-9 mx-auto">
+				 <div class="tab-content">
+
+					 <!-- All -->
+					 <div class="tab-pane fade show active" id="all">
+						<h2>All</h2>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Patient</th>
+									<th>Reason</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var appointment in Model.Appointments)
+								{
+									<tr>
+										<td>@appointment.Patient!.Name</td>
+										<td>@appointment.Reason</td>
+										<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					 </div>
+					 
+					 <!-- Upcoming -->
+					<div class="tab-pane fade" id="upcoming">
+						<h2>Upcoming</h2>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Patient</th>
+									<th>Reason</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								@{
+									bool hasUpcoming = false;
+
+									foreach (var a in Model.Appointments)
+									{
+										if (a.DateOfAppointment > DateTime.Now)
+										{
+											hasUpcoming = true;
+											break;
+										}
+									}
+
+									if (hasUpcoming)
+									{
+										foreach (var appointment in Model.Appointments)
+										{
+											if (appointment.DateOfAppointment > DateTime.Now)
+											{
+												<tr>
+													<td>@appointment.Patient!.Name</td>
+													<td>@appointment.Reason</td>
+													<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+												</tr>
+											}
+										}
+									}
+									else
+									{
+										<tr>
+											<td>No upcoming appointments</td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Pending-->
+					<div class="tab-pane fade" id="pending">
+						<h2>Pending</h2>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Patient</th>
+									<th>Reason</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var appointment in Model.Appointments)
+								{
+									if (appointment.DateOfAppointment > DateTime.Now)
+									{
+										<tr>
+											<td>@appointment.Patient!.Name</td>
+											<td>@appointment.Reason</td>
+											<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+										</tr>
+									}
+									else
+									{
+										<tr>
+											<td>No pending appointments</td>
+										</tr>
+									}
+								}
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Manage Appointments tab -->
+					<a href="/Appointments/Index" class="btn btn-primary">Manage appointments</a>
+				 </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tab-pane fade @(Model.ActiveTab == "tab4" ? "show active" : "")" id="tab4">
+		<!-- Reports content -->
+	</div>
+
+</div>

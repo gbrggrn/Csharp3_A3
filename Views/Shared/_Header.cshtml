@@ -1,0 +1,40 @@
+﻿<!-- Top Header -->
+<nav class="navbar navbar-light bg-white fs-6">
+    <div class="container d-flex align-items-center flex-nowrap">
+
+        <!-- Logo -->
+        <img src="~/images/logos/hospital_logo.jpg"
+             class="img-fluid rounded me-3"
+             alt="Hospital logo"
+             style="width: 50px; height: auto" />
+
+        <!-- Top Header title -->
+        <a class="navbar-brand" asp-area="" asp-page="/Index">Hospital Management System</a>
+
+        <!-- Center: Search -->
+        <form class="d-flex mx-auto flex-nowrap">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search input field" />
+            <button class="btn btn-outline-primary" type="submit" aria-label="Search button">Search</button>
+        </form>
+
+        <!-- Right: Language, login, staff -->
+        <div class="d-flex ms-auto flex-nowrap">
+            <!-- Language -->
+            <select class="form-select me-2" aria-label="Select language">
+                <option selected aria-label="English">English</option>
+                <option value="1" aria-label="Swedish">Swedish</option>
+            </select>
+            <!-- Login/Logout -->
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <form method="post" asp-page="/Account/Logout" class="me-2">
+                    <button type="submit" class="btn btn-outline-danger" aria-label="Logout button">Logout</button>
+                </form>
+            }
+            else
+            {
+                <a asp-page="/Account/Login" class="btn btn-outline-secondary me-2" aria-label="Login button">Login</a>
+            }
+        </div>
+    </div>
+</nav>

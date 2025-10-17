@@ -3,47 +3,114 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Csharp3_A3</title>
+    <title>@ViewData["Title"] - Csharp3_A1</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Csharp3_A3.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Csharp3_A1.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Csharp3_A3</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+        <!-- Render partial: _Header -->
+        @await Html.PartialAsync("_Header")
+        
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-info bg-opacity-25 fs-6 border-bottom box-shadow mb-3">
+            <div class="container">
+
+                <!-- Burger setup if small window -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbar-nav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                <!-- Burger target / menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav justify-content-center w-100">
+
+                        <!-- Life & Health nested dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="lifeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Life and health">Life & Health</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Exercise" aria-label="Exercise">Exercise</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Nutrition" aria-label="Nutrition">Nutrition</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Wellness" aria-label="Wellness">Wellness</a></li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                        <!-- Child & Pregnant nested dropdown-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="childPregDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Child and pregnant">Child & Pregnant</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/Menu/ChildPregnant/Child" aria-label="Child">Child</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/ChildPregnant/Pregnant" aria-label="Pregnant">Pregnant</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Diseases & Ailments nested dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="disAilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Diseases and ailments">Diseases & Ailments</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/Menu/DiseasesAilments/Diseases" aria-label="Diseases">Diseases</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/DiseasesAilments/Ailments" aria-label="Ailments">Ailments</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Accidents & Injuries nested dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="accInjDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Accidents and injuries">Accidents & Injuries</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/Menu/AccidentsInjuries/Accidents" aria-label="Accidents">Accidents</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/AccidentsInjuries/Injuries" aria-label="Injuries">Injuries</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Examination & Treatment nested dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="exaTreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Examination and treatment">Examination & Treatment</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-page="/Menu/ExaminationTreatment/Examination" aria-label="Examination">Examination</a></li>
+                                <li><a class="dropdown-item" asp-page="/Menu/ExaminationTreatment/Treatments" aria-label="Treatments">Treatments</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+
+            <div class="container mt-2">
+                <div class="row">
+
+                    <!-- Content -->
+                    <div class="col below-header-wrapper">
+                        <div class="content-wrapper">
+                            @RenderBody()
+                        </div>
+                    </div>
+
+                    <!-- News -->
+                    <div class="col-2">
+                        @await Component.InvokeAsync("News", new {maxItems = 5})
+                    </div>
+
+                </div>
+            </div>
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Csharp3_A3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - Csharp3_A1 - <a asp-area="" asp-page="/Privacy" aria-label="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
