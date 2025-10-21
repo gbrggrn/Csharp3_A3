@@ -1,4 +1,5 @@
-﻿using Csharp3_A3.Services;
+﻿using Csharp3_A3.Models;
+using Csharp3_A3.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Csharp3_A3.Controllers
@@ -19,11 +20,50 @@ namespace Csharp3_A3.Controllers
 			return View(newsItems);
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			var newsItem = await _newsService.GetByIdAsync(id);
+			if (newsItem == null)
+			{
+				return NotFound();
+			}
+
+			return View(newsItem);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{
 			await _newsService.DeleteAsync(id);
 			return RedirectToAction("NewsManagement", "News");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(NewsItem newsItem)
+		{
+			if (!ModelState.IsValid)
+				return View(newsItem);
+
+			var itemToUpdate = await _newsService.GetByIdAsync(newsItem.Id);
+			if (itemToUpdate == null)
+				return NotFound();
+
+			itemToUpdate.Title = newsItem.Title;
+			itemToUpdate.Content = newsItem.Content;
+			itemToUpdate.ImagePath = newsItem.ImagePath;
+			itemToUpdate.Url = newsItem.Url;
+
+			await _newsService.UpdateAsync(itemToUpdate);
+
+			return RedirectToAction("Index", "News");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Add(NewsItem newsItem)
+		{
+			await _newsService.AddAsync(newsItem);
+			return RedirectToAction("Index", "News");
 		}
 	}
 }
