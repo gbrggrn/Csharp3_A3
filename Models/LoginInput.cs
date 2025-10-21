@@ -1,4 +1,4 @@
-﻿namespace Csharp3_A1.Models
+﻿namespace Csharp3_A3.Models
 {
 	public class LoginInput
 	{

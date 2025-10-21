@@ -1,10 +1,9 @@
-﻿using Csharp3_A1.Data;
-using Csharp3_A1.Models;
+﻿using Csharp3_A3.Data;
+using Csharp3_A3.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
 
-namespace Csharp3_A1.Services
+namespace Csharp3_A3.Services
 {
 	public class AccountService
 	{

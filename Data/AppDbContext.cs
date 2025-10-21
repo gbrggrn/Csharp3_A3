@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Csharp3_A1.Models;
+using Csharp3_A3.Models;
 
-namespace Csharp3_A1.Data
+namespace Csharp3_A3.Data
 {
 	public class AppDbContext : DbContext
 	{

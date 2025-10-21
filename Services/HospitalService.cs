@@ -1,6 +1,6 @@
-﻿using Csharp3_A1.Data;
+﻿using Csharp3_A3.Data;
 
-namespace Csharp3_A1.Services
+namespace Csharp3_A3.Services
 {
 	public class HospitalService
 	{

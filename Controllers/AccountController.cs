@@ -1,5 +1,5 @@
-﻿using Csharp3_A1.Models;
-using Csharp3_A1.Services;
+﻿using Csharp3_A3.Models;
+using Csharp3_A3.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -12,6 +12,7 @@ namespace Csharp3_A3.Controllers
 
 		public AccountController(AccountService accountService)
 		{
+			_accountService = accountService;
 		}
 
 		[HttpGet]
@@ -54,7 +55,7 @@ namespace Csharp3_A3.Controllers
 			}
 			else
 			{
-				return RedirectToPage("StaffDashboard", "StaffPages");
+				return RedirectToAction("StaffDashboard", "StaffPages");
 			}
 		}
 

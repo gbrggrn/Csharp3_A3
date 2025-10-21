@@ -1,8 +1,8 @@
-﻿using Csharp3_A1.Data;
-using Csharp3_A1.Models;
+﻿using Csharp3_A3.Data;
+using Csharp3_A3.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Csharp3_A1.Services
+namespace Csharp3_A3.Services
 {
 	public class NewsService
 	{

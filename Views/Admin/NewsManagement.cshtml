@@ -1,5 +1,5 @@
-﻿@page
-@model Csharp3_A1.Pages.Admin.NewsManagementModel
+﻿@using Csharp3_A3.Models;
+@model List<NewsItem>
 @{
 	ViewData["Title"] = "Manage News";
 }
@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (var item in Model.NewsItems)
+		@foreach (var item in Model)
 		{
 			<tr>
 				<td>@item.Title</td>
