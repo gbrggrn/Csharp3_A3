@@ -1,5 +1,4 @@
-﻿@page
-@model Csharp3_A1.Pages.Appointments.IndexModel
+﻿@model Csharp3_A3.ViewModels.AppointmentsViewModel;
 @{
 }
 <h2>Manage Appointments</h2>
@@ -23,8 +22,8 @@
 				<td>@appointment.Reason</td>
 				<td>@appointment.DateOfAppointment.ToShortDateString()</td>
 				<td class="text-end">
-					<a asp-page="/Appointments/EditAppointment" asp-route-id="@appointment.Id" class="btn btn-outline-primary me-2">Edit</a>
-					<form method="post" asp-page-handler="Delete" asp-route-id="@appointment.Id" class="d-inline">
+					<a asp-controller="Appointments" asp-route-id="@appointment.Id" asp-action="Edit" class="btn btn-outline-primary me-2">Edit</a>
+					<form method="post" asp-controller="Appointments" asp-action="Delete" asp-route-id="@appointment.Id" class="d-inline">
 						<button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this appointment?');">Delete</button>
 					</form>
 				</td>
