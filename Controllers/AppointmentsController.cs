@@ -3,6 +3,7 @@ using Csharp3_A3.Services;
 using Csharp3_A3.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Csharp3_A3.Controllers
 {
@@ -58,6 +59,43 @@ namespace Csharp3_A3.Controllers
 				return View(appointment);
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> AddAppointment()
+		{
+			var username = User.Identity?.Name;
+			if (username == null)
+				return Forbid();
+
+			var currentUser = await _accountService.GetByUserNameAsync(username);
+			if (currentUser == null)
+				return Forbid();
+
+			var patientsList = await _patientService.GetAllAsync();
+			var staffList = await _staffService.GetAllAsync();
+
+			Patient? patient = null;
+			Staff? staff = null;
+
+			if (User.IsInRole("Patient"))
+			{
+				patient = await _userService.GetPatientByUserAsync(currentUser);
+			}
+			else if (User.IsInRole("Staff"))
+			{
+				staff = await _userService.GetStaffByUserAsync(currentUser);
+			}
+
+			var model = new AddAppointmentViewModel()
+			{
+				Patient = patient,
+				Staff = staff,
+				SelectPatients = new SelectList(patientsList, "Id", "Name"),
+				SelectStaff = new SelectList(staffList, "Id", "Name")
+			};
+
+			return View(model);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> EditAppointment(Appointment model)
 		{
@@ -85,6 +123,27 @@ namespace Csharp3_A3.Controllers
 				return NotFound();
 
 			await _appointmentService.DeleteAppointmentByIdAsync(id);
+			return RedirectToAction("Index", "Appointments");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> AddAppointment(AddAppointmentViewModel model)
+		{
+			var username = User.Identity?.Name;
+			if (username == null)
+				return Forbid();
+
+			var currentUser = await _accountService.GetByUserNameAsync(username);
+			if (currentUser == null)
+				return Forbid();
+
+			if (currentUser.PatientId != null)
+				model.Appointment.PatientId = (int)currentUser.PatientId;
+			if (currentUser.StaffId != null)
+				model.Appointment.StaffId = (int)currentUser.StaffId;
+
+			await _appointmentService.AddAppointmentAsync(model.Appointment);
+
 			return RedirectToAction("Index", "Appointments");
 		}
 	}

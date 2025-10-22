@@ -1,18 +1,17 @@
-﻿@page
-@model Csharp3_A1.Pages.Appointments.AddAppointmentModel
+﻿@model Csharp3_A3.ViewModels.AddAppointmentViewModel
 @{
 }
 <h2>Add Appointment</h2>
 
 <div>
 	<label>User: </label>
-	@if (Model.IsPatient)
+	@if (Model.Patient != null)
 	{
-		<input class="form-control" value="@Model.CurrentUser?.Patient?.Name" readonly />
+		<input class="form-control" value="@Model?.Patient?.Name" readonly />
 	}
-	@if (Model.IsStaff)
+	@if (Model.Staff != null)
 	{
-		<input class="form-control" value="@Model.CurrentUser?.Staff?.Name" readonly />
+		<input class="form-control" value="@Model.Staff?.Name" readonly />
 	}
 </div>
 
@@ -29,14 +28,14 @@
 		<span asp-validation-for="Appointment.DateOfAppointment" class="text-danger"></span>
 	</div>
 
-	@if (Model.IsPatient)
+	@if (Model.Patient != null)
 	{
 		<div class="form-group">
 			<label asp-for="Appointment.StaffId"></label>
 			<select asp-for="Appointment.StaffId" class="form-select" asp-items="Model.SelectStaff"></select>
 		</div>
 	}
-	@if (Model.IsStaff)
+	@if (Model.Staff != null)
 	{
 		<div class="form-group">
 			<label asp-for="Appointment.PatientId"></label>
@@ -48,5 +47,5 @@
 	<input type="hidden" asp-for="Appointment.StaffId" />
 
 	<button type="submit" class="btn btn-primary mt-2">Save</button>
-	<a asp-page="/Appointments/Index" class="btn btn-outline-primary mt-2">Cancel</a>
+	<a asp-controller="Appointments" asp-action="Index" class="btn btn-outline-primary mt-2">Cancel</a>
 </form>
