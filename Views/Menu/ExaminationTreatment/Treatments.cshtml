@@ -1,5 +1,4 @@
-﻿@page
-@model Csharp3_A1.Pages.Menu.ExaminationTreatment.TreatmentsModel
+﻿@model Csharp3_A3.Models.PageContent
 @{
 	ViewData["Title"] = "Treatments";
 }
@@ -7,27 +6,27 @@
 
     <div class="container mt-2">
         <div class="row">
-            <h2 class="m-2">Treatments</h2>
+            <h2 class="m-2">@Model.PageTitle</h2>
         </div>
 
         <div class="row mt-2">
             <!-- Content -->
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/treatments_img1.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[0].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>We have all kinds of pills</h4>
-                        <p>There is a pill for almost any problem!</p>
+                        <h4>@Model.Cards[0].BodyTitle</h4>
+                        <p>@Model.Cards[0].Body</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/treatments_img2.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[1].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>Natural medicine</h4>
-                        <p>We also do many different kinds of weird herbal medicine - try at your own risk!</p>
+                        <h4>@Model.Cards[1].BodyTitle</h4>
+                        <p>@Model.Cards[1].Body</p>
                     </div>
                 </div>
             </div>

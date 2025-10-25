@@ -1,5 +1,4 @@
-﻿@page
-@model Csharp3_A1.Pages.Menu.LifeHealth.NutritionModel
+﻿@model Csharp3_A3.Models.PageContent
 @{
 	ViewData["Title"] = "Nutrition";
 }
@@ -7,27 +6,27 @@
 
     <div class="container mt-2">
         <div class="row">
-            <h2 class="m-2">Nutrition</h2>
+            <h2 class="m-2">@Model.PageTitle</h2>
         </div>
 
         <div class="row mt-2">
             <!-- Content -->
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/nutrition_img1.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[0].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>Learn about how healthy eating habits can help you</h4>
-                        <p>We have the resources to teach you!</p>
+                        <h4>@Model.Cards[0].BodyTitle</h4>
+                        <p>@Model.Cards[0].Body</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/nutrition_img2.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[1].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>Healthy cooking classes</h4>
-                        <p>Having a rough time learning how to cook and eating healthy at the same time? Take a healthy cooking class!</p>
+                        <h4>@Model.Cards[1].BodyTitle</h4>
+                        <p>@Model.Cards[1].Body</p>
                     </div>
                 </div>
             </div>

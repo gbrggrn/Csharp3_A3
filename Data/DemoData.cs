@@ -1,7 +1,5 @@
-﻿using Csharp3_A1.Models;
-using Csharp3_A1.Services;
-using SQLitePCL;
-using System.Reflection;
+﻿using Csharp3_A3.Data;
+using Csharp3_A3.Models;
 
 namespace Csharp3_A1.Data
 {
@@ -12,6 +10,124 @@ namespace Csharp3_A1.Data
 			using var scope = services.CreateScope();
 			var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
+			//Seed page content
+			if (!context.PageContents.Any())
+			{
+				context.PageContents.AddRange(
+					new PageContent
+					{
+						Slug = "accidents",
+						PageTitle = "Accidents",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Accidents can come out of nowhere", "Make sure you have medical insurance!", "~/images/content/accidents_img1.jpg"),
+							("We can help you", "If you are clumsy enough to cause - or unlucky enough to end up in - an accident - we can fix you up!", "~/images/content/accidents_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "injuries",
+						PageTitle = "Injuries",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Injuries can happen out of nowhere", "Make sure you have medical insurance!", "~/images/content/injuries_img1.jpg"),
+							("We can help you", "If you are clumsy enough to cause - or unlucky enough to end up with an injury - we can fix you up!", "~/images/content/injuries_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "child",
+						PageTitle = "Child",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Children can come out of nowhere", "Make sure you have child insurance!", "~/images/content/child_img1.jpg"),
+							("We can help you", "Make sure your kids grow up smart - we can provide support through their developmental journey!", "~/images/content/child_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "pregnant",
+						PageTitle = "Pregnant",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Nearing the end of the journey", "We can help you prepare for the birth of your child", "~/images/content/pregnant_img1.jpg"),
+							("At the start of the journey", "Schedule your pregnancy checkups with us!", "~/images/content/pregnant_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "ailments",
+						PageTitle = "Ailments",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Get your testing done here", "We can treat most ailments!", "~/images/content/ailments_img1.jpg"),
+							("Kind of sick - but the boss still wants you to work?", "Come sit in our waiting room for an hour and you will surely have been exposed to enough viruses and bacteria to stay home for a few weeks!", "~/images/content/ailments_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "diseases",
+						PageTitle = "Diseases",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Get tested here", "Do you suspect you are suffering from a disease? We test for most diseases - take your test here!", "~/images/content/diseases_img1.jpg"),
+							("Disease prevention research", "We do extensive disease prevention research", "~/images/content/diseases_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "examination",
+						PageTitle = "Examination",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("We can examine every inch of you", "Get your physical here - nothing is beyond our reach!", "~/images/content/examination_img1.jpg"),
+							("Make sure if something feels wrong", "High blood pressure? If not, you will have it after we have examined you!", "~/images/content/examination_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "treatments",
+						PageTitle = "Treatments",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("We have all kinds of pills", "There is a pill for almost any problem!", "~/images/content/treatments_img1.jpg"),
+							("Natural medicine", "We also do many different kinds of weird herbal medicine - try at your own risk!", "~/images/content/treatments_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "exercise",
+						PageTitle = "Exercise",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Learn about the benefits of exercise", "We can guide you to a fit and healthy lifestyle!", "~/images/content/exercise_img1.jpg"),
+							("Physical therapy", "Do you have a sports related injury? We can heal you!", "~/images/content/exercise_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "nutrition",
+						PageTitle = "Nutrition",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Learn about how healthy eating habits can help you", "We have the resources to teach you!", "~/images/content/nutrition_img1.jpg"),
+							("Healthy cooking classes", "Having a rough time learning how to cook and eating healthy at the same time? Take a healthy cooking class!", "~/images/content/nutrition_img2.jpg")
+						}
+					},
+					new PageContent
+					{
+						Slug = "wellness",
+						PageTitle = "Wellness",
+						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						{
+							("Yoga - strong and calm", "Take a yoga-class with us - we have everything from beginner, intermediate to proficient!", "~/images/content/wellness_img1.jpg"),
+							("Get mindful through meditation", "Do guided meditation in a hospital setting - we will make you calm enough to be admitted because of slow breathing!", "~/images/content/wellness_img2.jpg")
+						}
+					}
+					);
+
+				await context.SaveChangesAsync();
+			}
 			//Seed news items
 			if (!context.NewsItems.Any())
 			{

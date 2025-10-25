@@ -1,33 +1,32 @@
-﻿@page
-@model Csharp3_A1.Pages.Menu.DiseasesAilments.AilmentsModel
+﻿@model Csharp3_A3.Models.PageContent
 @{
-	ViewData["Title"] = "Ailments";
+    ViewData["Title"] = "Ailments";
 }
 <div class="text-left">
 
     <div class="container mt-2">
         <div class="row">
-            <h2 class="m-2">Ailments</h2>
+            <h2 class="m-2">@Model.PageTitle</h2>
         </div>
 
         <div class="row mt-2">
             <!-- Content -->
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/ailments_img1.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[0].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>Get your testing done here</h4>
-                        <p>We can treat most ailments!</p>
+                        <h4>@Model.Cards[0].BodyTitle</h4>
+                        <p>@Model.Cards[0].Body</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="card m-2 w-100">
-                    <img src="~/images/content/ailments_img2.jpg" class="card-img-top img-fluid opacity-75" />
+                    <img src="@Model.Cards[1].ImgPath" class="card-img-top img-fluid opacity-75" />
                     <div class="card-body">
-                        <h4>Kind of sick - but the boss still wants you to work?</h4>
-                        <p>Come sit in our waiting room for an hour and you will surely have been exposed to enough viruses and bacteria to stay home for a few weeks!</p>
+                        <h4>@Model.Cards[1].BodyTitle</h4>
+                        <p>@Model.Cards[1].Body</p>
                     </div>
                 </div>
             </div>
