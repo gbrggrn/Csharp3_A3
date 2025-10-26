@@ -14,14 +14,14 @@ namespace Csharp3_A3.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> NewsManagement()
 		{
 			var newsItems = await _newsService.GetAllAsync();
 			return View(newsItems);
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Edit(int id)
+		public async Task<IActionResult> EditNews(int id)
 		{
 			var newsItem = await _newsService.GetByIdAsync(id);
 			if (newsItem == null)
@@ -53,7 +53,7 @@ namespace Csharp3_A3.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(NewsItem newsItem)
+		public async Task<IActionResult> EditNews(NewsItem newsItem)
 		{
 			if (!ModelState.IsValid)
 				return View(newsItem);
@@ -73,7 +73,7 @@ namespace Csharp3_A3.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Add(NewsItem newsItem)
+		public async Task<IActionResult> AddNews(NewsItem newsItem)
 		{
 			await _newsService.AddAsync(newsItem);
 			return RedirectToAction("Index", "News");

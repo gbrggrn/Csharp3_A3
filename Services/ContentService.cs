@@ -1,7 +1,6 @@
 ﻿using Csharp3_A3.Data;
 using Csharp3_A3.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Csharp3_A3.Services
 {
@@ -14,6 +13,6 @@ namespace Csharp3_A3.Services
 			_context = context;
 		}
 
-		public async Task<PageContent?> GetContentBySlugAsync(string slug) => await _context.PageContents.FirstOrDefaultAsync(pc => pc.Slug == slug);
+		public async Task<PageContent?> GetContentBySlugAsync(string slug) => await _context.PageContents.Include(pc => pc.Cards).FirstOrDefaultAsync(pc => pc.Slug == slug);
 	}
 }

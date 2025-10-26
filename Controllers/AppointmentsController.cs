@@ -35,10 +35,10 @@ namespace Csharp3_A3.Controllers
 
 			if (User.IsInRole("Staff"))
 			{
-				model.Staff = await _staffService.GetByIdAsync(user.Id);
+				model.Staff = await _staffService.GetByIdAsync(user.StaffId.Value);
 				model.Appointments = await _appointmentService.GetAppointmentsByStaffIdAsync(model.Staff!.Id);
 			}
-			if (User.IsInRole("Patient"))
+			else if (User.IsInRole("Patient"))
 			{
 				model.Patient = await _userService.GetPatientByUserAsync(user);
 				model.Appointments = await _appointmentService.GetAppointmentsByPatientIdAsync(model.Patient!.Id);

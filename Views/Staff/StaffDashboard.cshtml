@@ -107,7 +107,7 @@
 					<ul class="list-group list-group-flush">
 						@foreach (var patient in Model.Patients)
 						{
-							<a asp-controller="StaffDashboard" asp-action="StaffDashboard" asp-route-id="@patient.Id" asp-route-tab="tab2">
+							<a asp-controller="Staff" asp-action="StaffDashboard" asp-route-id="@patient.Id" asp-route-tab="tab2">
 								@patient.Name
 							</a>
 						}
@@ -275,7 +275,7 @@
 					</div>
 
 					<!-- Manage Appointments tab -->
-					<a href="/Appointments/Index" class="btn btn-primary">Manage appointments</a>
+					<a asp-controller="Appointments" asp-action="Index" class="btn btn-primary">Manage appointments</a>
 				 </div>
 			</div>
 		</div>

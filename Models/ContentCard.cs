@@ -6,5 +6,8 @@
 		public string BodyTitle { get; set; } = string.Empty;
 		public string Body { get; set; } = string.Empty;
 		public string ImgPath { get; set; } = string.Empty;
+
+		public int PageContentId { get; set; }
+		public PageContent? PageContent { get; set; }
 	}
 }

@@ -61,7 +61,7 @@ namespace Csharp3_A3.Controllers
 			}
 			else
 			{
-				return RedirectToAction("StaffDashboard", "StaffPages");
+				return RedirectToAction("StaffDashboard", "Staff");
 			}
 		}
 

@@ -16,5 +16,6 @@ namespace Csharp3_A3.Data
 		public DbSet<User> Users { get; set; }
 		public DbSet<Staff> Staff {  get; set; }
 		public DbSet<PageContent> PageContents { get; set; }
+		public DbSet<ContentCard> ContentCards { get; set; }
 	}
 }
