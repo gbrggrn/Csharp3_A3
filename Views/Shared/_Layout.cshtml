@@ -31,9 +31,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="lifeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Life and health">Life & Health</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Exercise" aria-label="Exercise">Exercise</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Nutrition" aria-label="Nutrition">Nutrition</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/LifeHealth/Wellness" aria-label="Wellness">Wellness</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Exercise" aria-label="Exercise">Exercise</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Nutrition" aria-label="Nutrition">Nutrition</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Wellness" aria-label="Wellness">Wellness</a></li>
                             </ul>
                         </li>
 
@@ -41,8 +41,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="childPregDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Child and pregnant">Child & Pregnant</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Menu/ChildPregnant/Child" aria-label="Child">Child</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/ChildPregnant/Pregnant" aria-label="Pregnant">Pregnant</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Child" aria-label="Child">Child</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Pregnant" aria-label="Pregnant">Pregnant</a></li>
                             </ul>
                         </li>
 
@@ -50,8 +50,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="disAilDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Diseases and ailments">Diseases & Ailments</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Menu/DiseasesAilments/Diseases" aria-label="Diseases">Diseases</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/DiseasesAilments/Ailments" aria-label="Ailments">Ailments</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Diseases" aria-label="Diseases">Diseases</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Ailments" aria-label="Ailments">Ailments</a></li>
                             </ul>
                         </li>
 
@@ -59,8 +59,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="accInjDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Accidents and injuries">Accidents & Injuries</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Menu/AccidentsInjuries/Accidents" aria-label="Accidents">Accidents</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/AccidentsInjuries/Injuries" aria-label="Injuries">Injuries</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Accidents" aria-label="Accidents">Accidents</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Injuries" aria-label="Injuries">Injuries</a></li>
                             </ul>
                         </li>
 
@@ -68,8 +68,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="exaTreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Examination and treatment">Examination & Treatment</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-page="/Menu/ExaminationTreatment/Examination" aria-label="Examination">Examination</a></li>
-                                <li><a class="dropdown-item" asp-page="/Menu/ExaminationTreatment/Treatments" aria-label="Treatments">Treatments</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Examination" aria-label="Examination">Examination</a></li>
+                                <li><a class="dropdown-item" asp-controller="Content" asp-action="Treatments" aria-label="Treatments">Treatments</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -103,7 +103,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - Csharp3_A1 - <a asp-area="" asp-page="/Privacy" aria-label="Privacy">Privacy</a>
+            &copy; 2025 - Csharp3_A1 - <a asp-area="" asp-controller="Home" asp-action="Privacy" aria-label="Privacy">Privacy</a>
         </div>
     </footer>
 

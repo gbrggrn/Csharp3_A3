@@ -107,7 +107,7 @@
 					<ul class="list-group list-group-flush">
 						@foreach (var patient in Model.Patients)
 						{
-							<a asp-page="/StaffPages/StaffDashboard" asp-route-id="@patient.Id" asp-route-tab="tab2">
+							<a asp-controller="StaffDashboard" asp-action="StaffDashboard" asp-route-id="@patient.Id" asp-route-tab="tab2">
 								@patient.Name
 							</a>
 						}

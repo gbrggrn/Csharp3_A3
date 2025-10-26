@@ -9,13 +9,13 @@
 	{
 		<input class="form-control" value="@Model?.Patient?.Name" readonly />
 	}
-	@if (Model.Staff != null)
+	else if (Model.Staff != null)
 	{
 		<input class="form-control" value="@Model.Staff?.Name" readonly />
 	}
 </div>
 
-<form method="post">
+<form method="post" asp-controller="Appointments" asp-action="AddAppointment">
 	<div class="form-group">
 		<label asp-for="Appointment.Reason"></label>
 		<input asp-for="Appointment.Reason" class="form-control" />
@@ -35,7 +35,7 @@
 			<select asp-for="Appointment.StaffId" class="form-select" asp-items="Model.SelectStaff"></select>
 		</div>
 	}
-	@if (Model.Staff != null)
+	else if (Model.Staff != null)
 	{
 		<div class="form-group">
 			<label asp-for="Appointment.PatientId"></label>

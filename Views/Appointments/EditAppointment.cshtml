@@ -13,7 +13,7 @@
 	<input class="form-control" value="@Model.Staff.Name" readonly />
 </div>
 
-<form method="post">
+<form method="post" asp-controller="Appointments" asp-action="EditAppointment">
 	<div class="form-group">
 		<label asp-for="Reason"></label>
 		<input asp-for="Reason" class="form-control" />

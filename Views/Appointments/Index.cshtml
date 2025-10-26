@@ -2,7 +2,7 @@
 @{
 }
 <h2>Manage Appointments</h2>
-<a asp-page="/Appointments/AddAppointment" class="btn btn-primary mt-2 mb-2">Add appointment</a>
+<a asp-controller="Appointments" asp-action="AddAppointment" class="btn btn-primary mt-2 mb-2">Add appointment</a>
 
 <table class="table align-middle">
 	<thead>
@@ -34,9 +34,9 @@
 
 @if (Model.Patient == null)
 {
-	<a href="/StaffPages/StaffDashboard" class="btn btn-outline-primary mt-2">Cancel</a>
+	<a asp-controller="Staff" asp-action="StaffDashboard" class="btn btn-outline-primary mt-2">Cancel</a>
 }
 @if (Model.Staff == null)
 {
-	<a href="/PatientPages/PatientPortal" class="btn btn-outline-primary mt-2">Cancel</a>
+	<a asp-controller="Patient" asp-action="PatientPortal" class="btn btn-outline-primary mt-2">Cancel</a>
 }

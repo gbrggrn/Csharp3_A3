@@ -27,6 +27,12 @@ namespace Csharp3_A3.Controllers
 			return View();
 		}
 
+		[HttpGet]
+		public IActionResult Privacy()
+		{
+			return View();
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginInput input)
 		{

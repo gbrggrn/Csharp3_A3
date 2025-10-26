@@ -32,6 +32,19 @@ namespace Csharp3_A3.Controllers
 			return View(newsItem);
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> Default()
+		{
+			var newsItems = await _newsService.GetAllAsync();
+			return View(newsItems);
+		}
+
+		[HttpGet]
+		public IActionResult Add()
+		{
+			return View();
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{

@@ -1,7 +1,7 @@
-﻿using Csharp3_A1.Services;
+﻿using Csharp3_A3.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Csharp3_A1.ViewComponents
+namespace Csharp3_A3.ViewComponents
 {
 	public class NewsViewComponent : ViewComponent
 	{

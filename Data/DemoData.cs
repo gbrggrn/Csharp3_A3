@@ -1,7 +1,7 @@
 ﻿using Csharp3_A3.Data;
 using Csharp3_A3.Models;
 
-namespace Csharp3_A1.Data
+namespace Csharp3_A3.Data
 {
 	public class DemoData
 	{
@@ -18,110 +18,110 @@ namespace Csharp3_A1.Data
 					{
 						Slug = "accidents",
 						PageTitle = "Accidents",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Accidents can come out of nowhere", "Make sure you have medical insurance!", "~/images/content/accidents_img1.jpg"),
-							("We can help you", "If you are clumsy enough to cause - or unlucky enough to end up in - an accident - we can fix you up!", "~/images/content/accidents_img2.jpg")
+							new ContentCard { BodyTitle = "Accidents can come out of nowhere", Body = "Make sure you have medical insurance!", ImgPath = "~/images/content/accidents_img1.jpg" },
+							new ContentCard { BodyTitle = "We can help you", Body = "If you are clumsy enough to cause - or unlucky enough to end up in - an accident - we can fix you up!", ImgPath = "~/images/content/accidents_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "injuries",
 						PageTitle = "Injuries",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Injuries can happen out of nowhere", "Make sure you have medical insurance!", "~/images/content/injuries_img1.jpg"),
-							("We can help you", "If you are clumsy enough to cause - or unlucky enough to end up with an injury - we can fix you up!", "~/images/content/injuries_img2.jpg")
+							new ContentCard { BodyTitle = "Injuries can happen out of nowhere", Body = "Make sure you have medical insurance!", ImgPath = "~/images/content/injuries_img1.jpg" },
+							new ContentCard { BodyTitle = "We can help you", Body = "If you are clumsy enough to cause - or unlucky enough to end up with an injury - we can fix you up!", ImgPath = "~/images/content/injuries_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "child",
 						PageTitle = "Child",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Children can come out of nowhere", "Make sure you have child insurance!", "~/images/content/child_img1.jpg"),
-							("We can help you", "Make sure your kids grow up smart - we can provide support through their developmental journey!", "~/images/content/child_img2.jpg")
+							new ContentCard { BodyTitle = "Children can come out of nowhere", Body = "Make sure you have child insurance!", ImgPath = "~/images/content/child_img1.jpg" },
+							new ContentCard { BodyTitle = "We can help you", Body = "Make sure your kids grow up smart - we can provide support through their developmental journey!", ImgPath = "~/images/content/child_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "pregnant",
 						PageTitle = "Pregnant",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Nearing the end of the journey", "We can help you prepare for the birth of your child", "~/images/content/pregnant_img1.jpg"),
-							("At the start of the journey", "Schedule your pregnancy checkups with us!", "~/images/content/pregnant_img2.jpg")
+							new ContentCard { BodyTitle = "Nearing the end of the journey", Body = "We can help you prepare for the birth of your child", ImgPath = "~/images/content/pregnant_img1.jpg" },
+							new ContentCard { BodyTitle = "At the start of the journey", Body = "Schedule your pregnancy checkups with us!", ImgPath = "~/images/content/pregnant_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "ailments",
 						PageTitle = "Ailments",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Get your testing done here", "We can treat most ailments!", "~/images/content/ailments_img1.jpg"),
-							("Kind of sick - but the boss still wants you to work?", "Come sit in our waiting room for an hour and you will surely have been exposed to enough viruses and bacteria to stay home for a few weeks!", "~/images/content/ailments_img2.jpg")
+							new ContentCard { BodyTitle = "Get your testing done here", Body = "We can treat most ailments!", ImgPath = "~/images/content/ailments_img1.jpg" },
+							new ContentCard { BodyTitle = "Kind of sick - but the boss still wants you to work?", Body = "Come sit in our waiting room for an hour and you will surely have been exposed to enough viruses and bacteria to stay home for a few weeks!", ImgPath = "~/images/content/ailments_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "diseases",
 						PageTitle = "Diseases",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards = 
 						{
-							("Get tested here", "Do you suspect you are suffering from a disease? We test for most diseases - take your test here!", "~/images/content/diseases_img1.jpg"),
-							("Disease prevention research", "We do extensive disease prevention research", "~/images/content/diseases_img2.jpg")
+							new ContentCard { BodyTitle = "Get tested here", Body = "Do you suspect you are suffering from a disease? We test for most diseases - take your test here!", ImgPath = "~/images/content/diseases_img1.jpg" },
+							new ContentCard { BodyTitle = "Disease prevention research", Body = "We do extensive disease prevention research", ImgPath = "~/images/content/diseases_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "examination",
 						PageTitle = "Examination",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("We can examine every inch of you", "Get your physical here - nothing is beyond our reach!", "~/images/content/examination_img1.jpg"),
-							("Make sure if something feels wrong", "High blood pressure? If not, you will have it after we have examined you!", "~/images/content/examination_img2.jpg")
+							new ContentCard { BodyTitle = "We can examine every inch of you", Body = "Get your physical here - nothing is beyond our reach!", ImgPath = "~/images/content/examination_img1.jpg" },
+							new ContentCard { BodyTitle = "Make sure if something feels wrong", Body = "High blood pressure? If not, you will have it after we have examined you!", ImgPath = "~/images/content/examination_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "treatments",
 						PageTitle = "Treatments",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("We have all kinds of pills", "There is a pill for almost any problem!", "~/images/content/treatments_img1.jpg"),
-							("Natural medicine", "We also do many different kinds of weird herbal medicine - try at your own risk!", "~/images/content/treatments_img2.jpg")
+							new ContentCard { BodyTitle = "We have all kinds of pills", Body = "There is a pill for almost any problem!", ImgPath = "~/images/content/treatments_img1.jpg" },
+							new ContentCard { BodyTitle = "Natural medicine", Body = "We also do many different kinds of weird herbal medicine - try at your own risk!", ImgPath = "~/images/content/treatments_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "exercise",
 						PageTitle = "Exercise",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Learn about the benefits of exercise", "We can guide you to a fit and healthy lifestyle!", "~/images/content/exercise_img1.jpg"),
-							("Physical therapy", "Do you have a sports related injury? We can heal you!", "~/images/content/exercise_img2.jpg")
+							new ContentCard { BodyTitle = "Learn about the benefits of exercise", Body = "We can guide you to a fit and healthy lifestyle!", ImgPath = "~/images/content/exercise_img1.jpg" },
+							new ContentCard { BodyTitle = "Physical therapy", Body = "Do you have a sports related injury? We can heal you!", ImgPath = "~/images/content/exercise_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "nutrition",
 						PageTitle = "Nutrition",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Learn about how healthy eating habits can help you", "We have the resources to teach you!", "~/images/content/nutrition_img1.jpg"),
-							("Healthy cooking classes", "Having a rough time learning how to cook and eating healthy at the same time? Take a healthy cooking class!", "~/images/content/nutrition_img2.jpg")
+							new ContentCard { BodyTitle = "Learn about how healthy eating habits can help you", Body = "We have the resources to teach you!", ImgPath = "~/images/content/nutrition_img1.jpg" },
+							new ContentCard { BodyTitle = "Healthy cooking classes", Body = "Having a rough time learning how to cook and eating healthy at the same time? Take a healthy cooking class!", ImgPath = "~/images/content/nutrition_img2.jpg" }
 						}
 					},
 					new PageContent
 					{
 						Slug = "wellness",
 						PageTitle = "Wellness",
-						Cards = new List<(string BodyTitle, string Body, string ImgPath)>
+						Cards =
 						{
-							("Yoga - strong and calm", "Take a yoga-class with us - we have everything from beginner, intermediate to proficient!", "~/images/content/wellness_img1.jpg"),
-							("Get mindful through meditation", "Do guided meditation in a hospital setting - we will make you calm enough to be admitted because of slow breathing!", "~/images/content/wellness_img2.jpg")
+							new ContentCard { BodyTitle = "Yoga - strong and calm", Body = "Take a yoga-class with us - we have everything from beginner, intermediate to proficient!", ImgPath = "~/images/content/wellness_img1.jpg" },
+							new ContentCard { BodyTitle = "Get mindful through meditation", Body = "Do guided meditation in a hospital setting - we will make you calm enough to be admitted because of slow breathing!", ImgPath = "~/images/content/wellness_img2.jpg" }
 						}
 					}
 					);
