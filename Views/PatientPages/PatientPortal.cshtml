@@ -1,15 +1,7 @@
-﻿@page
-@model Csharp3_A1.Pages.PatientPages.PatientPortalModel
-@{
-	ViewData["Title"] = "Patient portal";
-}
-<!-- See Staff/StaffDashboard or Shared/Layout for doing a menu with .nav, I wanted to try mixing in C# ->
-<!-- Browser query for button navigation -->
-@{
-	var section = Request.Query["section"].ToString() ?? "Profile"; //Request value of "section" - default to "Profile"
-}
+﻿@model Csharp3_A3.ViewModels.PatientPortalViewModel
 @{
 	Layout = "_MinimalLayout";
+	ViewData["Title"] = "Patient Portal";
 }
 
 <div class="container mt-3">
@@ -18,16 +10,16 @@
 		<!-- Sidebar menu -->
 		<div class="col-md-4">
 			<div class="d-flex flex-column gap-2 p-2 bg-info bg-opacity-50 rounded news-section">
-				<a href="/PatientPages/PatientPortal?section=Profile" class="btn btn-primary bg-black bg-opacity-50">Profile</a> <!-- If navigation successful: section = "Profile" -->
-				<a href="/PatientPages/PatientPortal?section=Appointments" class="btn btn-primary bg-black bg-opacity-50">Appointments</a>
-				<a href="/PatientPages/PatientPortal?section=Medical Records" class="btn btn-primary bg-black bg-opacity-50">Medical Records</a>
-				<a href="/PatientPages/PatientPortal?section=Prescriptions" class="btn btn-primary bg-black bg-opacity-50">Prescriptions</a>
+				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="Profile" class="btn btn-primary bg-black bg-opacity-50">Profile</a> <!-- If navigation successful: section = "Profile" -->
+				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="Appointments" class="btn btn-primary bg-black bg-opacity-50">Appointments</a>
+				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="Medical Records" class="btn btn-primary bg-black bg-opacity-50">Medical Records</a>
+				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="Prescriptions" class="btn btn-primary bg-black bg-opacity-50">Prescriptions</a>
 			</div>
 		</div>
 
 		<!-- Generated content based on menu-choice -->
 		<div class="col ms-2">
-			@if (section == "Profile")
+			@if (Model.ActiveSection == "Profile")
 			{
 				<h2>Profile</h2>
 				<table class="table">
@@ -45,7 +37,7 @@
 					</tbody>
 				</table>
 			}
-			else if (section == "Appointments")
+			else if (Model.ActiveSection == "Appointments")
 			{
 				<h2>Appointments</h2>
 				<table class="table">
@@ -62,16 +54,16 @@
 								<td>@appointment.DateOfAppointment</td>
 								<td>@appointment.Staff.Name</td>
 							</tr>
-						}
+						}	
 					</tbody>
 				</table>
 
 				<!-- Schedule Appointment button -->
-				<a href="/Appointments/Index" class="btn btn-outline-primary">Schedule appointment</a>
+				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="ScheduleAppointment" class="btn btn-outline-primary">Schedule appointment</a>
 			}
-			else if (section == "ScheduleAppointment")
+			else if (Model.ActiveSection == "ScheduleAppointment")
 			{
-				<form method="post" asp-page-handler="Book">
+				<form method="post" asp-action="BookAppointment" asp-controller="Patient">
 					<h2>Schedule appointment</h2>
 					<p class="mt-2 mb-2"></p>
 					<div class="mb-3">
@@ -92,7 +84,7 @@
 					<button type="submit" class="btn btn-primary">Book Appointment</button>
 				</form>
 			}
-			else if (section == "Medical Records")
+			else if (Model.ActiveSection == "Medical Records")
 			{
 				<h2>Medical Records</h2>
 				<table class="table">
@@ -117,7 +109,7 @@
 					</tbody>
 				</table>
 			}
-			else if (section == "Prescriptions")
+			else if (Model.ActiveSection == "Prescriptions")
 			{
 				<h2>Prescriptions</h2>
 				<table class="table">

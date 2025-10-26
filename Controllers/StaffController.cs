@@ -19,6 +19,7 @@ namespace Csharp3_A3.Controllers
 			_accountService = accountService;
 		}
 
+		[HttpGet]
 		public async Task<IActionResult> StaffDashboard(int? id, string? tab)
 		{
 			var staffDashboardViewModel = new StaffDashboardViewModel();
