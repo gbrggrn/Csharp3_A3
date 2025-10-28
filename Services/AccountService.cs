@@ -1,4 +1,5 @@
 ﻿using Csharp3_A3.Data;
+using Csharp3_A3.DataAccess;
 using Csharp3_A3.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -7,16 +8,13 @@ namespace Csharp3_A3.Services
 {
 	public class AccountService
 	{
-		private readonly AppDbContext _context;
+		private readonly AccountRepository _accountRepository;
 
-		public AccountService(AppDbContext context)
-		{
-			_context = context;
-		}
+		public AccountService(AccountRepository accountRepository) => _accountRepository = accountRepository;
 
 		public async Task<User?> AuthenticateAsync(string username, string password)
 		{
-			var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+			var user = await _accountRepository.GetUserByUsernameAsync(username);
 
 			//Return null if user can not be found or password is wrong
 			if (user == null || user.Password != password)
@@ -26,9 +24,9 @@ namespace Csharp3_A3.Services
 			return user;
 		}
 
-		public async Task<User?> GetByUserNameAsync(string username)
+		public async Task<User?> GetUserWithRoleByUsernameAsync(string username)
 		{
-			return await _context.Users.Include(u => u.Patient).Include(u => u.Staff).FirstOrDefaultAsync(u => u.Username == username);
+			return await _accountRepository.GetUserWithRoleByUsernameAsync(username);
 		}
 	}
 }

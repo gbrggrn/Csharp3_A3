@@ -30,7 +30,7 @@ namespace Csharp3_A3.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var username = User.Identity?.Name;
-			var user = await _accountService.GetByUserNameAsync(username);
+			var user = await _accountService.GetUserWithRoleByUsernameAsync(username);
 			var model = new AppointmentsViewModel();
 
 			if (User.IsInRole("Staff"))
@@ -66,7 +66,7 @@ namespace Csharp3_A3.Controllers
 			if (username == null)
 				return Forbid();
 
-			var currentUser = await _accountService.GetByUserNameAsync(username);
+			var currentUser = await _accountService.GetUserWithRoleByUsernameAsync(username);
 			if (currentUser == null)
 				return Forbid();
 
@@ -133,7 +133,7 @@ namespace Csharp3_A3.Controllers
 			if (username == null)
 				return Forbid();
 
-			var currentUser = await _accountService.GetByUserNameAsync(username);
+			var currentUser = await _accountService.GetUserWithRoleByUsernameAsync(username);
 			if (currentUser == null)
 				return Forbid();
 

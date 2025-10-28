@@ -36,7 +36,7 @@ namespace Csharp3_A3.Controllers
 			if (username == null)
 				return Forbid();
 
-			var user = await _accountService.GetByUserNameAsync(username);
+			var user = await _accountService.GetUserWithRoleByUsernameAsync(username);
 
 			if (user?.PatientId != null)
 			{
