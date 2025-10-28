@@ -40,7 +40,7 @@ namespace Csharp3_A3.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Add()
+		public IActionResult AddNews()
 		{
 			return View();
 		}
