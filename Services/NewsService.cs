@@ -1,31 +1,26 @@
-﻿using Csharp3_A3.Data;
+﻿using Csharp3_A3.DataAccess;
 using Csharp3_A3.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Csharp3_A3.Services
 {
 	public class NewsService
 	{
-		private readonly AppDbContext _context;
+		private readonly NewsRepository _newsRepository;
 
-		public NewsService(AppDbContext context)
-		{
-			_context = context;
-		}
+		public NewsService(NewsRepository newsRepository) => _newsRepository = newsRepository;
 
-		public async Task<List<NewsItem>> GetAllAsync() => await _context.NewsItems.ToListAsync();
+		public async Task<List<NewsItem>> GetAllAsync() => await _newsRepository.GetAllAsync();
 
-		public async Task<NewsItem?> GetByIdAsync(int id) => await _context.NewsItems.FindAsync(id);
-		
+		public async Task<NewsItem?> GetByIdAsync(int id) => await _newsRepository.GetByIdAsync(id);
+
 		public async Task AddAsync(NewsItem item)
 		{
-			_context.NewsItems.Add(item);
-			await _context.SaveChangesAsync();
+			await _newsRepository.AddAsync(item);
 		}
 
 		public async Task UpdateAsync(NewsItem item)
 		{
-			var itemToUpdate = await _context.NewsItems.FindAsync(item.Id);
+			var itemToUpdate = await _newsRepository.GetByIdAsync(item.Id);
 			if (itemToUpdate == null)
 				return;
 
@@ -34,16 +29,15 @@ namespace Csharp3_A3.Services
 			itemToUpdate.ImagePath = item.ImagePath;
 			itemToUpdate.Url = item.Url;
 
-			await _context.SaveChangesAsync();
+			await _newsRepository.UpdateAsync(itemToUpdate);
 		}
 
 		public async Task DeleteAsync(int id)
 		{
-			var item = await _context.NewsItems.FindAsync(id);
+			var item = await _newsRepository.GetByIdAsync(id);
 			if (item != null)
 			{
-				_context.NewsItems.Remove(item);
-				await _context.SaveChangesAsync();
+				await _newsRepository.DeleteAsync(item);
 			}
 		}
 	}
