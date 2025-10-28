@@ -1,4 +1,5 @@
 ﻿using Csharp3_A3.Data;
+using Csharp3_A3.DataAccess;
 using Csharp3_A3.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,13 +7,10 @@ namespace Csharp3_A3.Services
 {
 	public class ContentService
 	{
-		private readonly AppDbContext _context;
+		private readonly ContentRepository _contentRepository;
 
-		public ContentService(AppDbContext context)
-		{
-			_context = context;
-		}
+		public ContentService(ContentRepository contentRepository) => _contentRepository = contentRepository;
 
-		public async Task<PageContent?> GetContentBySlugAsync(string slug) => await _context.PageContents.Include(pc => pc.Cards).FirstOrDefaultAsync(pc => pc.Slug == slug);
+		public async Task<PageContent?> GetContentBySlugAsync(string slug) => await _contentRepository.GetContentBySlugAsync(slug);
 	}
 }
