@@ -1,4 +1,5 @@
 ﻿using Csharp3_A3.Data;
+using Csharp3_A3.DataAccess;
 using Csharp3_A3.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,53 +7,30 @@ namespace Csharp3_A3.Services
 {
 	public class PatientService
 	{
-		private readonly AppDbContext _context;
+		private readonly PatientRepository _patientRepository;
 
-		public PatientService(AppDbContext context)
-		{
-			_context = context;
-		}
+		public PatientService(PatientRepository patientRepository) => _patientRepository = patientRepository;
 
-		//Logic
+		public async Task<List<Patient>> GetAllAsync() => await _patientRepository.GetAllAsync();
 
-		public async Task<List<Patient>> GetAllAsync() => await _context.Patients.ToListAsync();
+		public async Task<Patient?> GetByIdAsync(int id) => await _patientRepository.GetByIdAsync(id);
 
-		public async Task<Patient?> GetByIdAsync(int id) => await _context.Patients.FindAsync(id);
+		public async Task AddAsync(Patient patient) => await _patientRepository.AddAsync(patient);
 
-		public async Task AddAsync(Patient patient)
-		{
-			_context.Patients.Add(patient);
-			await _context.SaveChangesAsync();
-		}
-
-		public async Task UpdateAsync(Patient patient)
-		{
-			_context.Patients.Update(patient);
-			await _context.SaveChangesAsync();
-		}
+		public async Task UpdateAsync(Patient patient) => await _patientRepository.UpdateAsync(patient);
 
 		public async Task UpdateAppointmentsAsync(int patientId, Appointment appointment)
 		{
-			var patient = await _context.Patients.FindAsync(patientId);
+			var patient = await _patientRepository.GetByIdAsync(patientId);
 
 			if (patient == null)
 			{
 				throw new Exception("Patient not found");
 			}
 
-			patient.Appointments.Add(appointment);
-			await _context.SaveChangesAsync();
+			await _patientRepository.UpdateAppointmentAsync(patient, appointment);
 		}
 
-		//Move to appointmentservice
-		public async Task<List<Appointment>> GetAppointmentsByPatientIdAsync(int patientId)
-		{
-			return await _context.Appointments.Where(a => a.PatientId == patientId).Include(a => a.Staff).ToListAsync();
-		}
-
-		public async Task<List<MedicalHistory>> GetMedicalHistoryByPatientIdAsync(int patientId)
-		{
-			return await _context.MedicalHistories.Where(m => m.PatientId == patientId).ToListAsync();
-		}
+		public async Task<List<MedicalHistory>> GetMedicalHistoryByPatientIdAsync(int patientId) => await _patientRepository.GetMedicalHistoryByPatientIdAsync(patientId);
 	}
 }
