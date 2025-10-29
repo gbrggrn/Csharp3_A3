@@ -1,4 +1,5 @@
 using Csharp3_A3.Data;
+using Csharp3_A3.DataAccess;
 using Csharp3_A3.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,15 +25,25 @@ namespace Csharp3_A3
 			var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 			builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+			
+			//Register Repositories
+			builder.Services.AddScoped<StaffRepository>();
+			builder.Services.AddScoped<PatientRepository>();
+			builder.Services.AddScoped<AccountRepository>();
+			builder.Services.AddScoped<AppointmentsRepository>();
+			builder.Services.AddScoped<ContentRepository>();
+			builder.Services.AddScoped<NewsRepository>();
+			builder.Services.AddScoped<UserRepository>();
 
-			builder.Services.AddScoped<HospitalService>(); //Register HospitalService
-			builder.Services.AddScoped<PatientService>(); //Register PatientService
-			builder.Services.AddScoped<StaffService>(); //Register StaffService
-			builder.Services.AddScoped<NewsService>(); //Register NewsService
-			builder.Services.AddScoped<AccountService>(); //Register AccountService
-			builder.Services.AddScoped<AppointmentService>(); //Register AppointmentService
-			builder.Services.AddScoped<UserService>(); //Register UserService
-			builder.Services.AddScoped<ContentService>(); //Register ContentService
+			//Register Services
+			builder.Services.AddScoped<HospitalService>();
+			builder.Services.AddScoped<PatientService>();
+			builder.Services.AddScoped<StaffService>();
+			builder.Services.AddScoped<NewsService>();
+			builder.Services.AddScoped<AccountService>();
+			builder.Services.AddScoped<AppointmentService>();
+			builder.Services.AddScoped<UserService>();
+			builder.Services.AddScoped<ContentService>();
 
 			var app = builder.Build();
 

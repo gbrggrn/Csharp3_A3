@@ -1,7 +1,5 @@
-﻿using Csharp3_A3.Data;
-using Csharp3_A3.DataAccess;
+﻿using Csharp3_A3.DataAccess;
 using Csharp3_A3.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Csharp3_A3.Services
 {
