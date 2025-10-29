@@ -1,6 +1,21 @@
-﻿namespace Csharp3_A3.DataAccess
+﻿using Csharp3_A3.Data;
+using Csharp3_A3.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Csharp3_A3.DataAccess
 {
 	public class StaffRepository
 	{
+		private readonly AppDbContext _context;
+
+		public StaffRepository(AppDbContext context) => _context = context;
+
+		public async Task<List<Staff>> GetAllAsync() => await _context.Staff.ToListAsync();
+
+		public async Task<Staff?> GetByIdAsync(int id) => await _context.Staff.FirstOrDefaultAsync(s => s.Id == id);
+
+		public async Task<List<Appointment>> GetAllAppointmentsByIdAsync(int staffId) => await _context.Appointments.Where(a => a.StaffId == staffId).ToListAsync();
+
+		public async Task<List<MedicalHistory>> GetRelevantMedicalHistoryByIdAsync(int staffId) => await _context.MedicalHistories.Where(m => m.StaffId == staffId).ToListAsync();
 	}
 }
