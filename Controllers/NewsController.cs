@@ -46,6 +46,20 @@ namespace Csharp3_A3.Controllers
 		}
 
 		[HttpPost]
+		public async Task<IActionResult> Search(string query)
+		{
+			var allNews = await _newsService.GetAllAsync();
+			if (allNews == null || string.IsNullOrWhiteSpace(query))
+			{
+				return View(new List<NewsItem>());
+			}
+
+			var results = allNews.Where(n => n.Title.Contains(query, StringComparison.OrdinalIgnoreCase) || n.Content.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+			return View(results);
+		}
+
+		[HttpPost]
 		public async Task<IActionResult> Delete(int id)
 		{
 			await _newsService.DeleteAsync(id);

@@ -1,0 +1,39 @@
+﻿@model List<NewsItem>
+@{
+}
+<div class="text-left">
+
+    <div class="container mt-2">
+        <div class="row">
+            <h2 class="m-2">Search Results</h2>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+				<a href="@item.Url" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark">
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="card m-2 w-100">
+                                <img src="~/@item.ImagePath" class="card-img-top img-fluid opacity-75" />
+                                <div class="card-body">
+                                    <h4>@item.Title</h4>
+                                    <p>@item.Content</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        else
+        {
+            <div class="row mt-2">
+                <div class="col">
+                    <p>No news items found matching your search criteria.</p>
+                </div>
+            </div>
+		}
+    </div>
+</div>

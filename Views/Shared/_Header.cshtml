@@ -12,8 +12,8 @@
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hospital Management System</a>
 
         <!-- Center: Search -->
-        <form class="d-flex mx-auto flex-nowrap">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search input field" />
+        <form asp-controller="News" asp-action="Search" method="post" class="d-flex mx-auto flex-nowrap">
+            <input class="form-control me-2" type="text" name="query" placeholder="Search news" aria-label="Search input field" />
             <button class="btn btn-outline-primary" type="submit" aria-label="Search button">Search</button>
         </form>
 
