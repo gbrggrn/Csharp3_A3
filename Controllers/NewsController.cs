@@ -45,6 +45,18 @@ namespace Csharp3_A3.Controllers
 			return View();
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> Details(int Id)
+		{
+			var newsItem = await _newsService.GetByIdAsync(Id);
+			if (newsItem == null)
+			{
+				return NotFound();
+			}
+			
+			return View(newsItem);
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> Search(string query)
 		{

@@ -1,4 +1,5 @@
-﻿@model List<NewsItem>
+﻿@using Csharp3_A3.Helpers
+@model List<NewsItem>
 @{
 }
 <div class="text-left">
@@ -18,8 +19,8 @@
                             <div class="card m-2 w-100">
                                 <img src="~/@item.ImagePath" class="card-img-top img-fluid opacity-75" />
                                 <div class="card-body">
-                                    <h4>@item.Title</h4>
-                                    <p>@item.Content</p>
+                                    <h4>@StringHelpers.Truncate(item.Title, 50)</h4>
+                                    <p>@StringHelpers.Truncate(item.Content, 100)</p>
                                 </div>
                             </div>
                         </div>
