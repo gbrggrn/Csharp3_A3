@@ -41,6 +41,11 @@
 			<label asp-for="Appointment.PatientId"></label>
 			<select asp-for="Appointment.PatientId" class="form-select" asp-items="Model.SelectPatients"></select>
 		</div>
+
+		<div class="form-group">
+			<label asp-for="Appointment.Status"></label>
+			<select asp-for="Appointment.Status" class="form-select" asp-items="Model.StatusList"></select>
+		</div>
 	}
 
 	<input type="hidden" asp-for="Appointment.PatientId" />

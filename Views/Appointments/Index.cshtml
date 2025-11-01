@@ -11,6 +11,7 @@
 			<th>Staff/Doctor</th>
 			<th>Reason</th>
 			<th>Date</th>
+			<th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -21,6 +22,7 @@
 				<td>@appointment.Staff.Name</td>
 				<td>@appointment.Reason</td>
 				<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+				<td>@appointment.Status.ToString()</td>
 				<td class="text-end">
 					<a asp-controller="Appointments" asp-route-id="@appointment.Id" asp-action="EditAppointment" class="btn btn-outline-primary me-2">Edit</a>
 					<form method="post" asp-controller="Appointments" asp-action="Delete" asp-route-id="@appointment.Id" class="d-inline">

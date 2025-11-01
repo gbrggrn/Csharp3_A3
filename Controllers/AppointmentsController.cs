@@ -1,4 +1,5 @@
 ﻿using Csharp3_A3.Models;
+using Csharp3_A3.Models.Enums;
 using Csharp3_A3.Services;
 using Csharp3_A3.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -54,9 +55,16 @@ namespace Csharp3_A3.Controllers
 			var appointment = await _appointmentService.GetAppointmentByIdAsync(id);
 
 			if (appointment == null)
-				throw new Exception("Appointment not found");
+				return NotFound();
 			else
-				return View(appointment);
+			{
+				var viewModel = new EditAppointmentViewModel()
+				{
+					Appointment = appointment
+				};
+
+				return View(viewModel);
+			}
 		}
 
 		[HttpGet]
@@ -85,7 +93,7 @@ namespace Csharp3_A3.Controllers
 				staff = await _userService.GetStaffByUserAsync(currentUser);
 			}
 
-			var model = new AddAppointmentViewModel()
+			var viewModel = new AddAppointmentViewModel()
 			{
 				Patient = patient,
 				Staff = staff,
@@ -93,23 +101,44 @@ namespace Csharp3_A3.Controllers
 				SelectStaff = new SelectList(staffList, "Id", "Name")
 			};
 
-			return View(model);
+			//ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(AppointmentStatus)));
+
+			return View(viewModel);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> EditAppointment(Appointment model)
+		public async Task<IActionResult> EditAppointment(EditAppointmentViewModel model)
 		{
 			if (!ModelState.IsValid)
-				return View();
+			{
+				// Repopulate StatusList before returning view
+				if (model.StatusList == null || !model.StatusList.Any())
+				{
+					model.StatusList = Enum.GetValues(typeof(AppointmentStatus))
+						.Cast<AppointmentStatus>()
+						.Select(s => new SelectListItem
+						{
+							Value = ((int)s).ToString(),
+							Text = s.ToString()
+						});
+				}
 
-			var itemToUpdate = await _appointmentService.GetAppointmentByIdAsync(model.Id);
+				return View(model);
+			}
+
+			var itemToUpdate = await _appointmentService.GetAppointmentByIdAsync(model.Appointment.Id);
 			if (itemToUpdate == null)
 				return NotFound();
 
-			itemToUpdate.PatientId = model.PatientId;
-			itemToUpdate.StaffId = model.StaffId;
-			itemToUpdate.DateOfAppointment = model.DateOfAppointment;
-			itemToUpdate.Reason = model.Reason;
+			itemToUpdate.PatientId = model.Appointment.PatientId;
+			itemToUpdate.StaffId = model.Appointment.StaffId;
+			itemToUpdate.DateOfAppointment = model.Appointment.DateOfAppointment;
+			itemToUpdate.Reason = model.Appointment.Reason;
+			
+			if (User.IsInRole("Staff"))
+			{
+				itemToUpdate.Status = model.Appointment.Status;
+			}
 
 			await _appointmentService.UpdateAsync(itemToUpdate);
 			return RedirectToAction("Index", "Appointments");
@@ -139,9 +168,18 @@ namespace Csharp3_A3.Controllers
 
 			if (currentUser.PatientId != null)
 				model.Appointment.PatientId = (int)currentUser.PatientId;
-			if (currentUser.StaffId != null)
+			else if (currentUser.StaffId != null)
 				model.Appointment.StaffId = (int)currentUser.StaffId;
+			
+			var staffAppointments = await _appointmentService.GetAppointmentsByStaffIdAsync(model.Appointment.StaffId);
+			bool dateConflict = staffAppointments.Any(a => a.DateOfAppointment == model.Appointment.DateOfAppointment);
 
+			if (dateConflict)
+			{
+				ModelState.AddModelError("", "The selected staff member already has an appointment at the chosen date and time. Please select a different time.");
+				return View(model);
+			}
+			
 			await _appointmentService.AddAppointmentAsync(model.Appointment);
 
 			return RedirectToAction("Index", "Appointments");

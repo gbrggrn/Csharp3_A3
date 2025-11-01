@@ -59,30 +59,7 @@
 				</table>
 
 				<!-- Schedule Appointment button -->
-				<a asp-controller="Patient" asp-action="PatientPortal" asp-route-section="ScheduleAppointment" class="btn btn-outline-primary">Schedule appointment</a>
-			}
-			else if (Model.ActiveSection == "ScheduleAppointment")
-			{
-				<form method="post" asp-action="BookAppointment" asp-controller="Patient">
-					<h2>Schedule appointment</h2>
-					<p class="mt-2 mb-2"></p>
-					<div class="mb-3">
-						<label asp-for="Appointment.DateOfAppointment" class="form-label"></label>
-						<input asp-for="Appointment.DateOfAppointment" type="datetime-local" class="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label asp-for="Appointment.Reason" class="form-label"></label>
-						<input asp-for="Appointment.Reason" class="form-control" />
-					</div>
-
-					<div class="mb-3">
-						<label asp-for="Appointment.StaffId" class="form-label">Select Doctor</label>
-						<select asp-for="Appointment.StaffId" class="form-select" asp-items="Model.SelectStaffList" />
-					</div>
-
-					<button type="submit" class="btn btn-primary">Book Appointment</button>
-				</form>
+				<a asp-controller="Appointments" asp-action="Index" class="btn btn-outline-primary">Manage appointments</a>
 			}
 			else if (Model.ActiveSection == "Medical Records")
 			{

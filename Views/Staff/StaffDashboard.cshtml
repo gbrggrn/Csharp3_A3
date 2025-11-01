@@ -1,4 +1,5 @@
-﻿@model Csharp3_A3.ViewModels.StaffDashboardViewModel
+﻿@using Csharp3_A3.Models.Enums
+@model Csharp3_A3.ViewModels.StaffDashboardViewModel
 @{
 	ViewData["Title"] = "Staff Dashboard";
 }
@@ -177,6 +178,7 @@
 									<th>Patient</th>
 									<th>Reason</th>
 									<th>Date</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -186,6 +188,7 @@
 										<td>@appointment.Patient!.Name</td>
 										<td>@appointment.Reason</td>
 										<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+										<td>@appointment.Status.ToString()</td>
 									</tr>
 								}
 							</tbody>
@@ -201,6 +204,7 @@
 									<th>Patient</th>
 									<th>Reason</th>
 									<th>Date</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -226,6 +230,7 @@
 													<td>@appointment.Patient!.Name</td>
 													<td>@appointment.Reason</td>
 													<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+													<td>@appointment.Status.ToString()</td>
 												</tr>
 											}
 										}
@@ -250,17 +255,19 @@
 									<th>Patient</th>
 									<th>Reason</th>
 									<th>Date</th>
+									<th>Status</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach (var appointment in Model.Appointments)
 								{
-									if (appointment.DateOfAppointment > DateTime.Now)
+									if (appointment.DateOfAppointment > DateTime.Now && appointment.Status == AppointmentStatus.Pending)
 									{
 										<tr>
 											<td>@appointment.Patient!.Name</td>
 											<td>@appointment.Reason</td>
 											<td>@appointment.DateOfAppointment.ToShortDateString()</td>
+											<td>@appointment.Status.ToString()</td>
 										</tr>
 									}
 									else
