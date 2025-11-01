@@ -1,5 +1,9 @@
 ﻿@model Csharp3_A3.ViewModels.AppointmentsViewModel;
 @{
+	if (User.IsInRole("Patient"))
+	{
+	Layout = "_MinimalLayout";
+	}
 }
 <h2>Manage Appointments</h2>
 <a asp-controller="Appointments" asp-action="AddAppointment" class="btn btn-primary mt-2 mb-2">Add appointment</a>
@@ -18,8 +22,8 @@
 		@foreach (var appointment in Model.Appointments)
 		{
 			<tr>
-				<td>@appointment.Patient.Name</td>
-				<td>@appointment.Staff.Name</td>
+				<td>@appointment.Patient!.Name</td>
+				<td>@appointment.Staff!.Name</td>
 				<td>@appointment.Reason</td>
 				<td>@appointment.DateOfAppointment.ToShortDateString()</td>
 				<td>@appointment.Status.ToString()</td>

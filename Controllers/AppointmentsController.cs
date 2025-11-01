@@ -31,12 +31,20 @@ namespace Csharp3_A3.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var username = User.Identity?.Name;
+
+			if (username == null)
+				return Forbid();
+
 			var user = await _accountService.GetUserWithRoleByUsernameAsync(username);
+
+			if (user == null)
+				return Forbid();
+
 			var model = new AppointmentsViewModel();
 
 			if (User.IsInRole("Staff"))
 			{
-				model.Staff = await _staffService.GetByIdAsync(user.StaffId.Value);
+				model.Staff = await _staffService.GetByIdAsync(user.StaffId!.Value);
 				model.Appointments = await _appointmentService.GetAppointmentsByStaffIdAsync(model.Staff!.Id);
 			}
 			else if (User.IsInRole("Patient"))
@@ -44,7 +52,8 @@ namespace Csharp3_A3.Controllers
 				model.Patient = await _userService.GetPatientByUserAsync(user);
 				model.Appointments = await _appointmentService.GetAppointmentsByPatientIdAsync(model.Patient!.Id);
 			}
-			else return Forbid();
+			else 
+				return Forbid();
 
 			return View(model);
 		}

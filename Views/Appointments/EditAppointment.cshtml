@@ -1,16 +1,20 @@
 ﻿@model Csharp3_A3.ViewModels.EditAppointmentViewModel
 @{
+	if (User.IsInRole("Patient"))
+	{
+		Layout = "_MinimalLayout";
+	}
 }
 <h2>Edit Appointment</h2>
 
 <div>
 	<label>Patient: </label>
-	<input class="form-control" value="@Model.Appointment.Patient.Name" readonly />
+	<input class="form-control" value="@Model.Appointment.Patient!.Name" readonly />
 </div>
 
 <div>
 	<label>Staff: </label>
-	<input class="form-control" value="@Model.Appointment.Staff.Name" readonly />
+	<input class="form-control" value="@Model.Appointment.Staff!.Name" readonly />
 </div>
 
 <form method="post" asp-controller="Appointments" asp-action="EditAppointment">

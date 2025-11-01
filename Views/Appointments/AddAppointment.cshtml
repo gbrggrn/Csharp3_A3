@@ -1,5 +1,9 @@
 ﻿@model Csharp3_A3.ViewModels.AddAppointmentViewModel
 @{
+	if (User.IsInRole("Patient"))
+	{
+		Layout = "_MinimalLayout";
+	}
 }
 <h2>Add Appointment</h2>
 
@@ -28,7 +32,7 @@
 		<span asp-validation-for="Appointment.DateOfAppointment" class="text-danger"></span>
 	</div>
 
-	@if (Model.Patient != null)
+	@if (Model!.Patient != null)
 	{
 		<div class="form-group">
 			<label asp-for="Appointment.StaffId"></label>

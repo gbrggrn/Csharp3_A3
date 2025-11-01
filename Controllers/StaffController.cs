@@ -28,6 +28,10 @@ namespace Csharp3_A3.Controllers
 			staffDashboardViewModel.ActiveTab = activeTab;
 
 			var username = User.Identity?.Name;
+
+			if (username == null)
+				return Forbid();
+
 			var user = await _accountService.GetUserWithRoleByUsernameAsync(username);
 
 			if (user?.StaffId != null)

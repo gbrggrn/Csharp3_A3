@@ -40,6 +40,9 @@ namespace Csharp3_A3.Controllers
 
 			var user = await _accountService.GetUserWithRoleByUsernameAsync(username);
 
+			if (user == null || user.PatientId == null)
+				return Forbid();
+
 			if (user?.PatientId != null)
 			{
 				patientPortalViewModel.CurrentPatient = await _patientService.GetByIdAsync(user.PatientId.Value);

@@ -13,7 +13,7 @@
         {
             @foreach (var item in Model)
             {
-				<a href="@item.Url" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-dark">
+				<a asp-controller="News" asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none text-black">
                     <div class="row mt-2">
                         <div class="col-md-6">
                             <div class="card m-2 w-100">
